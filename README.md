@@ -1,2 +1,2 @@
-![ScrFull](https://github.com/antomfdez/XmonadDots/blob/main/assets/scrf.png)
-![ScrEmp](https://github.com/antomfdez/XmonadDots/blob/main/assets/scr.png)
+![ScrFull](https://github.com/antomfdez/XmonadDots/blob/main/assets/onedark.png)
+![ScrEmp](https://github.com/antomfdez/XmonadDots/blob/main/assets/xonedark.png)

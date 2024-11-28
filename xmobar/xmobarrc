@@ -1,21 +1,22 @@
 Config { overrideRedirect = False
        , font     = "xft:RobotoMono Nerd Font bold 9"
-       , bgColor  = "#000000"
-       , fgColor  = "#f8f8f2"
-       , alpha    = 100
+       , bgColor  = "#282c34"
+       , fgColor  = "#ff6c6b"
+       , alpha    = 255
        , position = TopSize L 100 24
+    --    , iconRoot = 
        , commands = [ Run Cpu
                         [ "-L", "20"
                         , "-H", "50"
                         , "--high"  , "red"
                         , "--normal", "green"
                         ] 10
-                    , Run Memory ["--template", "Mem: <usedratio>%"] 10
+                    , Run Memory ["--template", " Mem: <usedratio>%"] 10
                     , Run Swap [] 10
                     , Run Date "%a %Y-%m-%d <fc=#8be9fd>%H:%M</fc>" "date" 10
                     , Run XMonadLog
                     ]
        , sepChar  = "%"
        , alignSep = "}{"
-       , template = "%XMonadLog% }{ %cpu% | %memory% * %swap% | %date% "
+       , template = "%XMonadLog% }{  %cpu% | %memory% * %swap% |  %date% "
        }

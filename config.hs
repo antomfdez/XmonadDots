@@ -13,6 +13,11 @@ import XMonad.Hooks.StatusBar
 import XMonad.Hooks.StatusBar.PP
 import XMonad.Layout.NoBorders
 import XMonad.Actions.SpawnOn
+import XMonad.Util.Hacks (windowedFullscreenFixEventHook)
+import XMonad.Hooks.ManageHelpers (isFullscreen, doFullFloat)
+import XMonad.Layout.MultiToggle (mkToggle, single, EOT(EOT), (??))
+import XMonad.Layout.MultiToggle.Instances (StdTransformers(NBFULL, MIRROR, NOBORDERS))
+
 
 import qualified XMonad.StackSet as W
 import qualified Data.Map        as M
@@ -34,7 +39,7 @@ myModMask :: KeyMask
 myModMask       = mod1Mask
 
 myWorkspaces :: [String]
-myWorkspaces    = ["web", "code", "ctrl", "term" ] ++ map show [5..9]
+myWorkspaces    = ["web", "code", "ctrl", "term", "doc", "virt", "test", "files", "other" ] -- ++ map show [5..9]
 
 -- ["1","2","3","4","5","6","7","8","9"]
 
@@ -92,7 +97,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 
     , ((modm .|. shiftMask, xK_q     ), io exitSuccess)
 
-    , ((modm              , xK_q     ), spawn "rm -rf ~/.xmonad/dist-newstyle; xmonad --recompile; ~/.xmonad/xmonad-x86_64-freebsd --restart")
+    , ((modm              , xK_q     ), spawn "rm -rf ~/.xmonad/dist-newstyle; xmonad --recompile; pkill xmobar; ~/.xmonad/xmonad-x86_64-freebsd --restart")
 
     , ((modm .|. shiftMask, xK_slash ), xmessage help)
     ]
@@ -128,7 +133,7 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList
 -- ||                            ||
 -- ################################
 
-myLayout = smartSpacingWithEdge 10 tiled ||| Mirror tiled ||| Full
+myLayout = smartSpacingWithEdge 10 (tiled ||| Mirror tiled ||| Full)
   where
      -- default tiling algorithm partitions the screen into two panes
      tiled   = Tall nmaster delta ratio
@@ -152,10 +157,11 @@ myManageHook = composeAll
     [ className =? "MPlayer"        --> doFloat
     , className =? "Gimp"           --> doFloat
     , resource  =? "desktop_window" --> doIgnore
-    , resource  =? "kdesktop"       --> doIgnore ]
+    , resource  =? "kdesktop"       --> doIgnore
+    , isFullscreen -->  doFullFloat ]
 
 
-myEventHook = mempty
+myEventHook = windowedFullscreenFixEventHook
 
 
 myLogHook :: X ()
@@ -180,8 +186,11 @@ myPPminimal = def
    -- , ppSort = getSortByXineramaRule  -- Sort left/right screens on the left, non-empty workspaces after those
    , ppTitle = const ""  -- Don't show the focused window's title
    , ppTitleSanitize = const ""  -- Also about window's title
-   , ppCurrent = xmobarColor "#fffff0" "" . wrap "[" "]"
+   , ppCurrent = xmobarColor "#fffff0" "" . wrap "[ " " ]"
    , ppUrgent = xmobarColor "#ff0000" "" . wrap "!" "!"
+   , ppHidden = xmobarColor "#c678dd" "" . wrap "" ""
+   , ppHiddenNoWindows = xmobarColor "#61afef" "" . wrap "" ""
+   , ppWsSep = "  "
    }
 
 -- ################################

@@ -1,8 +1,9 @@
 Config { overrideRedirect = False
-       , font     = "xft:iosevka 12"
+       , font     = "xft:RobotoMono Nerd Font bold 9"
        , bgColor  = "#000000"
        , fgColor  = "#f8f8f2"
        , alpha    = 100
+       , position = TopSize L 100 24
        , commands = [ Run Cpu
                         [ "-L", "20"
                         , "-H", "50"

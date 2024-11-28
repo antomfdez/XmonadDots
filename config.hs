@@ -7,7 +7,6 @@ import XMonad.Util.Run
 import XMonad.Util.SpawnOnce
 import XMonad.Layout.Spacing
 import XMonad.Util.WorkspaceCompare
-import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.StatusBar
 import XMonad.Hooks.StatusBar.PP
@@ -15,9 +14,9 @@ import XMonad.Layout.NoBorders
 import XMonad.Actions.SpawnOn
 import XMonad.Util.Hacks (windowedFullscreenFixEventHook)
 import XMonad.Hooks.ManageHelpers (isFullscreen, doFullFloat)
-import XMonad.Layout.MultiToggle (mkToggle, single, EOT(EOT), (??))
-import XMonad.Layout.MultiToggle.Instances (StdTransformers(NBFULL, MIRROR, NOBORDERS))
-
+import XMonad.Util.ClickableWorkspaces
+import XMonad.Hooks.EwmhDesktops
+import XMonad.Actions.ToggleFullFloat
 
 import qualified XMonad.StackSet as W
 import qualified Data.Map        as M
@@ -40,6 +39,7 @@ myModMask       = mod1Mask
 
 myWorkspaces :: [String]
 myWorkspaces    = ["web", "code", "ctrl", "term", "doc", "virt", "test", "files", "other" ] -- ++ map show [5..9]
+
 
 -- ["1","2","3","4","5","6","7","8","9"]
 
@@ -200,7 +200,7 @@ myPPminimal = def
 -- ################################
 
 mySB = statusBarProp "xmobar -x 0 ~/.xmonad/xmobar/xmobarrc" (pure myPPminimal)
-main = xmonad $ withEasySB mySB defToggleStrutsKey defaults
+main = xmonad $ toggleFullFloatEwmhFullscreen . ewmhFullscreen . ewmh $ withEasySB mySB defToggleStrutsKey defaults
 
 -- ################################
 -- ||                            ||

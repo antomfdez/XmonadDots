@@ -41,7 +41,7 @@ myWorkspaces    = ["web", "code", "ctrl", "term" ] ++ map show [5..9]
 myNormalBorderColor :: String
 myNormalBorderColor  = "#000000"
 myFocusedBorderColor :: String
-myFocusedBorderColor = "#ff0000"
+myFocusedBorderColor = "#ff6c6b"
 
 -- ################################
 -- ||                            ||
@@ -128,7 +128,7 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList
 -- ||                            ||
 -- ################################
 
-myLayout = tiled ||| Mirror tiled ||| Full
+myLayout = smartSpacingWithEdge 10 tiled ||| Mirror tiled ||| Full
   where
      -- default tiling algorithm partitions the screen into two panes
      tiled   = Tall nmaster delta ratio

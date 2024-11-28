@@ -180,6 +180,8 @@ myPPminimal = def
    -- , ppSort = getSortByXineramaRule  -- Sort left/right screens on the left, non-empty workspaces after those
    , ppTitle = const ""  -- Don't show the focused window's title
    , ppTitleSanitize = const ""  -- Also about window's title
+   , ppCurrent = xmobarColor "#fffff0" "" . wrap "[" "]"
+   , ppUrgent = xmobarColor "#ff0000" "" . wrap "!" "!"
    }
 
 -- ################################
@@ -188,7 +190,7 @@ myPPminimal = def
 -- ||                            ||
 -- ################################
 
-mySB = statusBarProp "xmobar -x 0 ~/.xmonad/xmobar/xmobarrc" (pure xmobarPP)
+mySB = statusBarProp "xmobar -x 0 ~/.xmonad/xmobar/xmobarrc" (pure myPPminimal)
 main = xmonad $ withEasySB mySB defToggleStrutsKey defaults
 
 -- ################################

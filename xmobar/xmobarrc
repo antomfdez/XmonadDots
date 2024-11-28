@@ -1,10 +1,10 @@
 Config { overrideRedirect = False
-       , font     = "xft:RobotoMono Nerd Font bold 9"
+       , font     = "xft:RobotoMono Nerd Font Bold 9"
        , bgColor  = "#282c34"
        , fgColor  = "#ff6c6b"
        , alpha    = 255
        , position = TopSize L 100 24
-    --    , iconRoot = 
+       , iconRoot = "."
        , commands = [ Run Cpu
                         [ "-L", "20"
                         , "-H", "50"
@@ -13,10 +13,10 @@ Config { overrideRedirect = False
                         ] 10
                     , Run Memory ["--template", "Mem: <usedratio>%"] 10
                     , Run Swap [] 10
-                    , Run Date "%a %Y-%m-%d <fc=#8be9fd>%H:%M</fc>" "date" 10
+                    , Run Date "%a %Y-%m-%d <fc=#8be9fd>(%H:%M)</fc>" "date" 10
                     , Run XMonadLog
                     ]
        , sepChar  = "%"
        , alignSep = "}{"
-       , template = " %XMonadLog% }{  %cpu% |  %memory% * %swap% |  %date% "
+       , template = "<fc=#fffff0>  </fc> %XMonadLog% }{<fc=#98be65>  %cpu% </fc>|<fc=#c678dd>  %memory% * %swap% </fc>|<fc=#da8548>  %date% </fc>"
        }

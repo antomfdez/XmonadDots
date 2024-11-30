@@ -183,7 +183,7 @@ myPPminimal = def
    , ppTitleSanitize = const ""  -- Also about window's title
    , ppCurrent = xmobarColor "#fffff0" "" . wrap "[ " " ]"
    , ppUrgent = xmobarColor "#ff0000" "" . wrap "!" "!"
-   , ppHidden = xmobarColor "#c678dd" "" . wrap "" ""
+   , ppHidden = xmobarColor "#ff6c6b" "" . wrap "" ""
    , ppHiddenNoWindows = xmobarColor "#61afef" "" . wrap "" ""
    , ppWsSep = "  "
    }
